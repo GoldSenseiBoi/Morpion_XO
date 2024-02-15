@@ -1,7 +1,14 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class MorpionGUI extends JFrame implements ActionListener {
     private JButton[][] boutons;
@@ -18,7 +25,7 @@ public class MorpionGUI extends JFrame implements ActionListener {
         boutons = new JButton[taille][taille];
         tourJoueurHumain = true;
 
-        setTitle("Morpion");
+        setTitle("Morpion de IB, pas franck!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 300);
         setLayout(new BorderLayout());
@@ -35,7 +42,7 @@ public class MorpionGUI extends JFrame implements ActionListener {
             }
         }
 
-        labelInfo = new JLabel("Tour du joueur humain (X)");
+        labelInfo = new JLabel("Tour du joueur 2 (X)");
         add(panelGrille, BorderLayout.CENTER);
         add(labelInfo, BorderLayout.SOUTH);
 
@@ -94,19 +101,19 @@ public class MorpionGUI extends JFrame implements ActionListener {
         if (grille[ligne][colonne] == vide) {
             if (tourJoueurHumain) {
                 grille[ligne][colonne] = joueurHumain;
-                labelInfo.setText("Tour de l'ordinateur (O)");
+                labelInfo.setText("Tour du joueur 2 (O)");
             } else {
                 grille[ligne][colonne] = joueurOrdinateur;
-                labelInfo.setText("Tour du joueur humain (X)");
+                labelInfo.setText("Tour du joueur 1 (X)");
             }
             tourJoueurHumain = !tourJoueurHumain;
             afficherGrille();
 
             if (estGagnant(joueurHumain)) {
-                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné !");
+                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 2");
                 initialiserGrille();
             } else if (estGagnant(joueurOrdinateur)) {
-                JOptionPane.showMessageDialog(this, "Désolé, l'ordinateur a gagné.");
+                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 1");
                 initialiserGrille();
             } else if (estGrillePleine()) {
                 JOptionPane.showMessageDialog(this, "Match nul !");
