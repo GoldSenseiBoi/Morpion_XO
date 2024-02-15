@@ -110,10 +110,10 @@ public class MorpionGUI extends JFrame implements ActionListener {
             afficherGrille();
 
             if (estGagnant(joueurHumain)) {
-                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 2");
+                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 1");
                 initialiserGrille();
             } else if (estGagnant(joueurOrdinateur)) {
-                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 1");
+                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 2");
                 initialiserGrille();
             } else if (estGrillePleine()) {
                 JOptionPane.showMessageDialog(this, "Match nul !");
