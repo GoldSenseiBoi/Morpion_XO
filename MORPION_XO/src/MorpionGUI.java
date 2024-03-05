@@ -1,14 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.util.Random;
 
 public class MorpionGUI extends JFrame implements ActionListener {
     private JButton[][] boutons;
@@ -19,13 +13,15 @@ public class MorpionGUI extends JFrame implements ActionListener {
     private final int taille = 3;
     private boolean tourJoueurHumain;
     private JLabel labelInfo;
+    private boolean modeOrdinateur;
 
-    public MorpionGUI() {
+    public MorpionGUI(boolean modeOrdinateur) {
+        this.modeOrdinateur = modeOrdinateur;
         grille = new char[taille][taille];
         boutons = new JButton[taille][taille];
         tourJoueurHumain = true;
 
-        setTitle("Morpion de IB, pas franck!");
+        setTitle("Morpion");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(300, 300);
         setLayout(new BorderLayout());
@@ -42,7 +38,7 @@ public class MorpionGUI extends JFrame implements ActionListener {
             }
         }
 
-        labelInfo = new JLabel("Tour du joueur 2 (X)");
+        labelInfo = new JLabel("Tour du joueur 1 (X)");
         add(panelGrille, BorderLayout.CENTER);
         add(labelInfo, BorderLayout.SOUTH);
 
@@ -110,16 +106,29 @@ public class MorpionGUI extends JFrame implements ActionListener {
             afficherGrille();
 
             if (estGagnant(joueurHumain)) {
-                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 1");
+                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné !");
                 initialiserGrille();
             } else if (estGagnant(joueurOrdinateur)) {
-                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné ! joueur 2");
+                JOptionPane.showMessageDialog(this, "L'ordinateur a gagné !");
                 initialiserGrille();
             } else if (estGrillePleine()) {
                 JOptionPane.showMessageDialog(this, "Match nul !");
                 initialiserGrille();
+            } else if (!tourJoueurHumain && modeOrdinateur) {
+                jouerCoupOrdinateur();
             }
         }
+    }
+
+    private void jouerCoupOrdinateur() {
+        Random rand = new Random();
+        int ligne, colonne;
+        do {
+            ligne = rand.nextInt(taille);
+            colonne = rand.nextInt(taille);
+        } while (grille[ligne][colonne] != vide);
+
+        jouerCoup(ligne, colonne);
     }
 
     @Override
@@ -135,6 +144,6 @@ public class MorpionGUI extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new MorpionGUI();
+        new MorpionAccueil();
     }
 }
