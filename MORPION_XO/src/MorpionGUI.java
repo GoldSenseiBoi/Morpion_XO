@@ -118,10 +118,14 @@ public class MorpionGUI extends JFrame implements ActionListener {
             afficherGrille();
 
             if (estGagnant(joueurHumain)) {
-                JOptionPane.showMessageDialog(this, "Bravo ! Vous avez gagné !");
+                JOptionPane.showMessageDialog(this, "Le joueur 1 a gagné !");
                 initialiserGrille();
             } else if (estGagnant(joueurOrdinateur)) {
-                JOptionPane.showMessageDialog(this, "L'ordinateur a gagné !");
+                if (modeOrdinateur)
+                    JOptionPane.showMessageDialog(this, "Dommage ! L'ordinateur a gagné !");
+                else
+                    JOptionPane.showMessageDialog(this, "Bravo ! Joueur 2 a gagné !");
+
                 initialiserGrille();
             } else if (estGrillePleine()) {
                 JOptionPane.showMessageDialog(this, "Match nul !");
