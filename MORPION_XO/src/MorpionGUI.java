@@ -23,7 +23,7 @@ public class MorpionGUI extends JFrame implements ActionListener {
 
         setTitle("Morpion");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 350); // Increased height for the return button
+        setSize(300, 350);
         setLayout(new BorderLayout());
 
         JPanel panelGrille = new JPanel();
@@ -38,21 +38,21 @@ public class MorpionGUI extends JFrame implements ActionListener {
             }
         }
 
-        JPanel panelButtons = new JPanel(); // Panel for the buttons
+        JPanel panelButtons = new JPanel();
         JButton retourButton = new JButton("Retour");
         retourButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the current game window
-                new MorpionAccueil(); // Open the home screen
+                dispose();
+                new MorpionAccueil();
             }
         });
-        panelButtons.add(retourButton); // Add return button to the panel
+        panelButtons.add(retourButton);
 
         labelInfo = new JLabel("Tour du joueur 1 (X)");
         add(panelGrille, BorderLayout.CENTER);
         add(labelInfo, BorderLayout.SOUTH);
-        add(panelButtons, BorderLayout.NORTH); // Add the panel with return button to the top
+        add(panelButtons, BorderLayout.NORTH);
 
         initialiserGrille();
 
